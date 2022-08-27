@@ -1,5 +1,4 @@
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,12 +8,10 @@ public class TestaListagem {
 		
 		public static void main(String[] args) throws SQLException {
 
-			Connection con = DriverManager.
-					getConnection("jdbc:mysql://localhost/loja_virtual?useTimezone=true&serverTimezone=UTC", "root", "andrematheus.com");
-
+			ConnectionFactory connectionFactory = new ConnectionFactory();
+			Connection connection = connectionFactory.recuperaConexao();
 			
-			
-			Statement stm = con.createStatement();
+			Statement stm = connection.createStatement();
 			stm.execute("SELECT ID, NOME, DESCRICAO FROM PRODUTO");
 			
 			ResultSet rst = stm.getResultSet();
@@ -28,7 +25,7 @@ public class TestaListagem {
 				System.out.println(descricao);
 			}
 		
-			con.close();
+			connection.close();
 		}
 
 }
