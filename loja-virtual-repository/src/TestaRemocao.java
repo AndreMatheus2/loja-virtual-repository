@@ -16,6 +16,8 @@ public class TestaRemocao {
 		
 		Integer linhasModificadas = stm.getUpdateCount();
 		System.out.println(linhasModificadas);
+		
+		connection.close();
 	}
 
 }

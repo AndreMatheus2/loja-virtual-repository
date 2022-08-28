@@ -7,14 +7,20 @@ import java.sql.Statement;
 public class TestaInsercaoComParametro {
 
 	public static void main(String[] args) throws SQLException {
-		String nome = "Mouse'";
-		String descricao = "Razer); delete from produto;";
+		
 		ConnectionFactory connectionFactory = new ConnectionFactory();
 		Connection connection = connectionFactory.recuperaConexao();
+		connection.setAutoCommit(false);
 
 		PreparedStatement stm = connection.prepareStatement("INSERT INTO PRODUTO (nome, descricao) VALUES (?, ?)", 
 				Statement.RETURN_GENERATED_KEYS);
 		
+		adicionarVariavel("SmartTV", "LG", stm);
+		adicionarVariavel("Micro-Ondas", "Electrolux", stm);
+	}
+
+	private static void adicionarVariavel(String nome, String descricao, PreparedStatement stm)
+			throws SQLException {
 		stm.setString(1, nome);
 		stm.setString(2, descricao);
 		stm.execute();
@@ -25,6 +31,7 @@ public class TestaInsercaoComParametro {
 			System.out.println(id);
 		}
 		
+		rst.close();
 	}
 
 }
