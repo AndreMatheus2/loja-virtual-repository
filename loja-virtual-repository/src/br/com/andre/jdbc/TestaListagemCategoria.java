@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import br.com.andre.jdbc.dao.CategoriaDAO;
-import br.com.andre.jdbc.dao.ProdutoDAO;
 import br.com.andre.jdbc.modelo.Categoria;
 import br.com.andre.jdbc.modelo.Produto;
 
@@ -15,15 +14,11 @@ public class TestaListagemCategoria {
 
 		try (Connection connection = new ConnectionFactory().recuperaConexao()) {
 			CategoriaDAO categoriaDao = new CategoriaDAO(connection);
-			List<Categoria> categorias = categoriaDao.listar();
+			List<Categoria> categorias = categoriaDao.listarComProdutos();
 			categorias.stream().forEach(ct -> {
 				System.out.println(ct.getNome());
-				try {
-					for (Produto produto : new ProdutoDAO(connection).buscar(ct)) {
-						System.out.println(ct.getNome() + " - " + produto.getNome());
-					}
-				} catch (SQLException e) {
-					e.printStackTrace();
+				for (Produto produto : ct.getProdutos()) {
+					System.out.println(ct.getNome() + " - " + produto.getNome());
 				}
 			});
 		}
