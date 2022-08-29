@@ -1,3 +1,4 @@
+package br.com.andre.jdbc;
 import java.sql.SQLException;
 
 public class TestaPoolConexoes {
