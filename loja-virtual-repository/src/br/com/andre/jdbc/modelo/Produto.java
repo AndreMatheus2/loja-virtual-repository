@@ -7,6 +7,25 @@ public class Produto {
 	private String descricao;
 	
 	
+	
+	
+	public Produto(String nome, String descricao) {
+		super();
+		this.nome = nome;
+		this.descricao = descricao;
+	}
+	
+	
+	
+	public Produto(int id, String nome, String descricao) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.descricao = descricao;
+	}
+
+
+
 	public int getId() {
 		return id;
 	}
